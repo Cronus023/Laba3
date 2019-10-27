@@ -18,5 +18,16 @@ public class GornerTableModel extends AbstractTableModel {
 		// TODO Auto-generated method stub
 		return null;
 	}
+    
+	//get information about column names
+	public Class<?> getColumnClass(int arg0) {
+		// TODO Auto-generated method stub
+		return super.getColumnClass(arg0);
+	}
 
+	//get information about the data type in the columns
+	public String getColumnName(int arg0) {
+		// TODO Auto-generated method stub
+		return super.getColumnName(arg0);
+	}
 }

@@ -28,32 +28,45 @@ public class GornerTableModel extends AbstractTableModel {
 	public Double getStep() {
 		return step;
 	}
+	
+	//we have only two columns
 	public int getColumnCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 2;
 	}
-
-	public int getRowCount() {
-		// TODO Auto-generated method stub
-		return 0;
+    
+	//the number of rows in the table depends on the length of the tabulation interval and the step size
+	public int getRowCount(){
+	    return new Double(Math.ceil((to-from)/step)).intValue()+1;
 	}
-
-	public Object getValueAt(int arg0, int arg1) {
-		// TODO Auto-generated method stub
-		return null;
+    
+	//the contents of table cells
+	public Object getValueAt(int row, int col) {
+		// 1)the value of X
+		double x = from + step*row;
+		if (col==0) {
+		    return x;
+		} 
+		// 2)the value of a polynomial
+		else {
+		    Double result = 0.0;
+		    //the value of the polynomial will be calculated later
+		    return result;
+		}
 	}
     
 	//get information about column names
-	public Class<?> getColumnClass(int arg0) {
-		// TODO Auto-generated method stub
-		return super.getColumnClass(arg0);
+	public Class<?> getColumnClass(int col) {
+		return Double.class;
 	}
 
-	//get information about the data type in the columns
-	public String getColumnName(int arg0) {
-		// TODO Auto-generated method stub
-		return super.getColumnName(arg0);
+	//get information about column names
+	public String getColumnName(int col) {
+		switch (col){
+		case 0:
+		    return "Значение X";
+		default:
+		    return "Значение многочлена";
+		}
 	}
-	
 	
 }

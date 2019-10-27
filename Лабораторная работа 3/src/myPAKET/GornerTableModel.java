@@ -3,7 +3,7 @@ package myPAKET;
 import javax.swing.table.AbstractTableModel;
 
 public class GornerTableModel extends AbstractTableModel {
-    
+	
 	//array of coefficients of the polynomial
 	private Double[] coefficients;
 	//start and end points of the segment tabulations
@@ -17,6 +17,16 @@ public class GornerTableModel extends AbstractTableModel {
 		this.to = to;
 		this.step = step;
 		this.coefficients = coefficients;
+	}
+	
+	public Double getFrom() {
+		return from;
+	}
+	public Double getTo() {
+		return to;
+	}
+	public Double getStep() {
+		return step;
 	}
 	public int getColumnCount() {
 		// TODO Auto-generated method stub

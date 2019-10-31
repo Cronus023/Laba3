@@ -69,15 +69,43 @@ public class MainFrame extends JFrame {
 		JMenu fileMenu = new JMenu("Файл");
 		menuBar.add(fileMenu);
 		JMenu tableMenu = new JMenu("Таблица");
-		menuBar.add(tableMenu);
-		
-		
-		
+		menuBar.add(tableMenu);			
 	}
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	protected void saveToTextFile(File selectedFile) {
+		 try {
+			// Создать новый символьный поток вывода, направленный в указанный файл
+			PrintStream out = new PrintStream(selectedFile);
+			// Записать в поток вывода заголовочные сведения
+			out.println("Результаты табулирования многочлена по схеме Горнера");
+			out.print("Многочлен: ");
+			for (int i=0; i<coefficients.length; i++) {
+			    out.print(coefficients[i] + "*X^" + (coefficients.length-i-1));
+			    if (i!=coefficients.length-1)
+			        out.print(" + ");
+			}
+			out.println("");
+			out.println("Интервал от " + data.getFrom() + " до " + data.getTo() + " с шагом " + data.getStep());
+			out.println("================================================");
+			// Записать в поток вывода значения в точках
+			for (int i = 0; i<data.getRowCount(); i++) {
+			    out.println("Значение в точке " + data.getValueAt(i,0) + " равно " + data.getValueAt(i,1));
+			}
+			// Закрыть поток
+			out.close();
+			} catch (FileNotFoundException e) {
+				
+		    }
+	}
 
+	public static void main(String[] args) {
+		
+		
+		Double[] coefficients = new Double[3];
+        
+		MainFrame frame = new MainFrame(coefficients);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
 	}
 
 }

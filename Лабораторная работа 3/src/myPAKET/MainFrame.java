@@ -54,7 +54,7 @@ public class MainFrame extends JFrame {
 	private GornerTableModel data;
     
 	public MainFrame(Double[] coefficients) {
-		super("Табулирование многочлена на отрезке по схеме Горнера");
+		super("РўР°Р±СѓР»РёСЂРѕРІР°РЅРёРµ РјРЅРѕРіРѕС‡Р»РµРЅР° РЅР° РѕС‚СЂРµР·РєРµ РїРѕ СЃС…РµРјРµ Р“РѕСЂРЅРµСЂР°");
 		this.coefficients = coefficients;
 		setSize(WIDTH, HEIGHT);
 		Toolkit kit = Toolkit.getDefaultToolkit();
@@ -66,27 +66,45 @@ public class MainFrame extends JFrame {
 		setJMenuBar(menuBar);
 	
 		//add to our menu some items
-		JMenu fileMenu = new JMenu("Файл");
+		JMenu fileMenu = new JMenu("Р¤Р°Р№Р»");
 		menuBar.add(fileMenu);
-		JMenu tableMenu = new JMenu("Таблица");
-		menuBar.add(tableMenu);			
+		JMenu tableMenu = new JMenu("РўР°Р±Р»РёС†Р°");
+		menuBar.add(tableMenu);	
+		
+		//create a new "action" - save to a text file
+		Action saveToTextAction = new AbstractAction("РЎРѕС…СЂР°РЅРёС‚СЊ РІ С‚РµРєСЃС‚РѕРІС‹Р№ С„Р°Р№Р»") {
+		public void actionPerformed(ActionEvent event) {
+		    if (fileChooser==null) {
+		        fileChooser = new JFileChooser();
+		        fileChooser.setCurrentDirectory(new File("."));
+		    }
+		    // show the dialog window
+		    if (fileChooser.showSaveDialog(MainFrame.this) == JFileChooser.APPROVE_OPTION)
+		        saveToTextFile(fileChooser.getSelectedFile());
+		}
+		};
+		//add to our menu new item
+		saveToTextMenuItem = fileMenu.add(saveToTextAction);
+		// by default, the menu item is not available (no data yet)
+		saveToTextMenuItem.setEnabled(false);
+		
 	}
 	
 	protected void saveToTextFile(File selectedFile) {
 		 try {
 			PrintStream out = new PrintStream(selectedFile);
-			out.println("Результаты табулирования многочлена по схеме Горнера");
-			out.print("Многочлен: ");
+			out.println("Р РµР·СѓР»СЊС‚Р°С‚С‹ С‚Р°Р±СѓР»РёСЂРѕРІР°РЅРёСЏ РјРЅРѕРіРѕС‡Р»РµРЅР° РїРѕ СЃС…РµРјРµ Р“РѕСЂРЅРµСЂР°");
+			out.print("РњРЅРѕРіРѕС‡Р»РµРЅ: ");
 			for (int i=0; i<coefficients.length; i++) {
 			    out.print(coefficients[i] + "*X^" + (coefficients.length-i-1));
 			    if (i!=coefficients.length-1)
 			        out.print(" + ");
 			}
 			out.println("");
-			out.println("Интервал от " + data.getFrom() + " до " + data.getTo() + " с шагом " + data.getStep());
+			out.println("РРЅС‚РµСЂРІР°Р» РѕС‚ " + data.getFrom() + " РґРѕ " + data.getTo() + " СЃ С€Р°РіРѕРј " + data.getStep());
 			out.println("================================================");
 			for (int i = 0; i<data.getRowCount(); i++) {
-			    out.println("Значение в точке " + data.getValueAt(i,0) + " равно " + data.getValueAt(i,1));
+			    out.println("Р—РЅР°С‡РµРЅРёРµ РІ С‚РѕС‡РєРµ " + data.getValueAt(i,0) + " СЂР°РІРЅРѕ " + data.getValueAt(i,1));
 			}
 			out.close();
 			} catch (FileNotFoundException e) {

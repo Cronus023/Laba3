@@ -58,8 +58,20 @@ public class MainFrame extends JFrame {
 		this.coefficients = coefficients;
 		setSize(WIDTH, HEIGHT);
 		Toolkit kit = Toolkit.getDefaultToolkit();
-		setLocation((kit.getScreenSize().width - WIDTH)/2,
-		(kit.getScreenSize().height - HEIGHT)/2);
+		setLocation((kit.getScreenSize().width - WIDTH)/2,(kit.getScreenSize().height - HEIGHT)/2);
+		
+		// create menu
+		JMenuBar menuBar = new JMenuBar();
+		// set menu as main menu in our window
+		setJMenuBar(menuBar);
+	
+		//add to our menu some items
+		JMenu fileMenu = new JMenu("Файл");
+		menuBar.add(fileMenu);
+		JMenu tableMenu = new JMenu("Таблица");
+		menuBar.add(tableMenu);
+		
+		
 		
 	}
 	

@@ -175,6 +175,21 @@ public class MainFrame extends JFrame {
 				getContentPane().validate();	   
 			}
 	    });
+		
+		// signature to enter the left border of the segment
+		JLabel labelForFrom = new JLabel("X изменяется на интервале от:");
+		textFieldFrom = new JTextField("0.0", 10);
+		textFieldFrom.setMaximumSize(textFieldFrom.getPreferredSize());
+		
+		// signature to enter the right border of the segment
+		JLabel labelForTo = new JLabel("до:");
+		textFieldTo = new JTextField("1.0", 10);
+		textFieldTo.setMaximumSize(textFieldTo.getPreferredSize());
+		
+		//signature to enter the step of tabulation
+		JLabel labelForStep = new JLabel("с шагом:");
+		textFieldStep = new JTextField("0.1", 10);
+		textFieldStep.setMaximumSize(textFieldStep.getPreferredSize());
 	}
 	
 	protected void saveToTextFile(File selectedFile) {

@@ -44,6 +44,7 @@ public class MainFrame extends JFrame {
 	private JMenuItem saveToTextMenuItem;
 	private JMenuItem saveToGraphicsMenuItem;
 	private JMenuItem searchValueMenuItem;
+	private JMenuItem AboutProgrammeMenuItem;
 	
 	private JTextField textFieldFrom;
 	private JTextField textFieldTo;
@@ -115,8 +116,16 @@ public class MainFrame extends JFrame {
 			    getContentPane().repaint();
 			}
 			};
-			searchValueMenuItem = tableMenu.add(searchValueAction);
-			searchValueMenuItem.setEnabled(false);
+		searchValueMenuItem = tableMenu.add(searchValueAction);
+		searchValueMenuItem.setEnabled(false);
+			
+		//create a new "action" - AboutProgramme
+		Action AboutProgramme = new AbstractAction("О программе") {
+		public void actionPerformed(ActionEvent event) {
+			JOptionPane.showMessageDialog(MainFrame.this,"Клочко Андрей 8 группа", "Автор программы",JOptionPane.INFORMATION_MESSAGE);
+		}
+		};
+		AboutProgrammeMenuItem = tableInformation.add(AboutProgramme);
 		
 		// create the button "Вычислить"
 		JButton buttonCalc = new JButton("Вычислить");

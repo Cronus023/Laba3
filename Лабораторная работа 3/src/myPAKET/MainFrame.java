@@ -70,6 +70,8 @@ public class MainFrame extends JFrame {
 		menuBar.add(fileMenu);
 		JMenu tableMenu = new JMenu("Таблица");
 		menuBar.add(tableMenu);	
+		JMenu tableInformation = new JMenu("Справка");
+		menuBar.add(tableInformation );
 		
 		//create a new "action" - save to a text file
 		Action saveToTextAction = new AbstractAction("Сохранить в текстовый файл") {
@@ -269,8 +271,9 @@ public class MainFrame extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		Double[] coefficients = new Double[3];
-        
+		Double[] coefficients = new Double[2];
+		coefficients[0] = 1.0;
+		coefficients[1] = 2.0;
 		MainFrame frame = new MainFrame(coefficients);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);

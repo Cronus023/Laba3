@@ -141,7 +141,7 @@ public class MainFrame extends JFrame {
 			    // refresh the main window
 			    getContentPane().validate();
 			   
-			    //some actions now available
+			    //some actions now is available
 			    saveToTextMenuItem.setEnabled(true);
 			    saveToGraphicsMenuItem.setEnabled(true);
 			    searchValueMenuItem.setEnabled(true);
@@ -151,7 +151,30 @@ public class MainFrame extends JFrame {
 			}
 			}
 			});
-
+		
+		//create the button "Очистить поля"
+		JButton buttonReset = new JButton("Очистить поля");
+		buttonCalc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				//set the value of fields by default
+				textFieldFrom.setText("0.0");
+				textFieldTo.setText("1.0");
+				textFieldStep.setText("0.1");
+				
+				//remove all nested items from the hboxresult container 
+				hBoxResult.removeAll();
+				// add in hBoxResult container empty panel
+				hBoxResult.add(new JPanel());
+				
+				//some actions now is not available
+				saveToTextMenuItem.setEnabled(false);
+				saveToGraphicsMenuItem.setEnabled(false);
+				searchValueMenuItem.setEnabled(false);
+				
+				// refresh the main window
+				getContentPane().validate();	   
+			}
+	    });
 	}
 	
 	protected void saveToTextFile(File selectedFile) {

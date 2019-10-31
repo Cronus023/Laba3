@@ -74,9 +74,7 @@ public class MainFrame extends JFrame {
 	
 	protected void saveToTextFile(File selectedFile) {
 		 try {
-			// Создать новый символьный поток вывода, направленный в указанный файл
 			PrintStream out = new PrintStream(selectedFile);
-			// Записать в поток вывода заголовочные сведения
 			out.println("Результаты табулирования многочлена по схеме Горнера");
 			out.print("Многочлен: ");
 			for (int i=0; i<coefficients.length; i++) {
@@ -87,20 +85,32 @@ public class MainFrame extends JFrame {
 			out.println("");
 			out.println("Интервал от " + data.getFrom() + " до " + data.getTo() + " с шагом " + data.getStep());
 			out.println("================================================");
-			// Записать в поток вывода значения в точках
 			for (int i = 0; i<data.getRowCount(); i++) {
 			    out.println("Значение в точке " + data.getValueAt(i,0) + " равно " + data.getValueAt(i,1));
 			}
-			// Закрыть поток
 			out.close();
 			} catch (FileNotFoundException e) {
 				
 		    }
 	}
+    
+	
+	protected void saveToGraphicsFile(File selectedFile) {
+		try {
+		DataOutputStream out = new DataOutputStream(new
+		FileOutputStream(selectedFile));
+		for (int i = 0; i<data.getRowCount(); i++) {
+		    out.writeDouble((Double)data.getValueAt(i,0));
+		    out.writeDouble((Double)data.getValueAt(i,0));
+		}
+		out.close();
+		} 
+		catch (Exception e) {
+		
+		}
+	}
 
 	public static void main(String[] args) {
-		
-		
 		Double[] coefficients = new Double[3];
         
 		MainFrame frame = new MainFrame(coefficients);

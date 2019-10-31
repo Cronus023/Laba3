@@ -116,6 +116,42 @@ public class MainFrame extends JFrame {
 			searchValueMenuItem = tableMenu.add(searchValueAction);
 			searchValueMenuItem.setEnabled(false);
 		
+		// create the button "Вычислить"
+		JButton buttonCalc = new JButton("Вычислить");
+		buttonCalc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+			try {
+			    // read the values of the beginning and end of the segment, step from the input fields
+			    Double from = Double.parseDouble(textFieldFrom.getText());
+			    Double to = Double.parseDouble(textFieldTo.getText());
+			    Double step = Double.parseDouble(textFieldStep.getText());
+			
+			    // create the table
+			    data = new GornerTableModel(from, to, step,MainFrame.this.coefficients);
+			    JTable table = new JTable(data);
+			    table.setDefaultRenderer(Double.class, renderer);
+			    // set the size of row 
+			    table.setRowHeight(30);
+			
+			    //remove all nested items from the hboxresult container
+			    hBoxResult.removeAll();
+			    // add to hBoxResult the table "wrapped" in the panel by scroll bars
+			    hBoxResult.add(new JScrollPane(table));
+			
+			    // refresh the main window
+			    getContentPane().validate();
+			   
+			    //some actions now available
+			    saveToTextMenuItem.setEnabled(true);
+			    saveToGraphicsMenuItem.setEnabled(true);
+			    searchValueMenuItem.setEnabled(true);
+			} 
+			catch (NumberFormatException ex) {
+			    JOptionPane.showMessageDialog(MainFrame.this,"Ошибка в формате записи числа с плавающей точкой", "Ошибочный формат числа",JOptionPane.WARNING_MESSAGE);
+			}
+			}
+			});
+
 	}
 	
 	protected void saveToTextFile(File selectedFile) {

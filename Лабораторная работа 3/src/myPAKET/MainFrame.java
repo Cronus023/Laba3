@@ -83,7 +83,7 @@ public class MainFrame extends JFrame {
 		        saveToTextFile(fileChooser.getSelectedFile());
 		}
 		};
-		//add to our menu new item
+		//add to our menu a new item
 		saveToTextMenuItem = fileMenu.add(saveToTextAction);
 		// by default, the menu item is not available (no data yet)
 		saveToTextMenuItem.setEnabled(false);
@@ -101,6 +101,20 @@ public class MainFrame extends JFrame {
 		};
 		saveToGraphicsMenuItem = fileMenu.add(saveToGraphicsAction);
 		saveToGraphicsMenuItem.setEnabled(false);
+		
+		//create a new "action" - find a value of palinomial
+		Action searchValueAction = new AbstractAction("Найти значение многочлена") {
+			public void actionPerformed(ActionEvent event) {
+			    // prompt the user to enter the search string
+			    String value = JOptionPane.showInputDialog(MainFrame.this,"Введите значение для поиска", "Поиск значения",JOptionPane.QUESTION_MESSAGE);
+			    // set the entered value as a needle in the Visualizer
+			    renderer.setNeedle(value);
+			    // refresh the table
+			    getContentPane().repaint();
+			}
+			};
+			searchValueMenuItem = tableMenu.add(searchValueAction);
+			searchValueMenuItem.setEnabled(false);
 		
 	}
 	

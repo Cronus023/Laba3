@@ -28,6 +28,10 @@ public class GornerTableCellRenderer implements TableCellRenderer {
 	//this field for formatting string representation of numbers
 	private DecimalFormat formatter = (DecimalFormat)NumberFormat.getInstance();
 	
+	
+	public void setNeedle(String needle) {
+        this.needle = needle;
+	}
 	public GornerTableCellRenderer() {
 		// show only 5 decimal places
 		formatter.setMaximumFractionDigits(5);
@@ -45,11 +49,19 @@ public class GornerTableCellRenderer implements TableCellRenderer {
 		panel.setLayout(new FlowLayout(FlowLayout.LEFT));
 	}
 
-	
-	public Component getTableCellRendererComponent(JTable arg0, Object arg1, boolean arg2, boolean arg3, int arg4,
-			int arg5) {
-		// TODO Auto-generated method stub
-		return null;
+	public Component getTableCellRendererComponent(JTable table,Object value, boolean isSelected, boolean hasFocus, int row, int col) {
+		    //convert double to string using formatter
+			String formattedDouble = formatter.format(value);
+			// set the label text equal to the string representation of a number
+			label.setText(formattedDouble);
+			if (col==1 && needle!=null && needle.equals(formattedDouble)) {
+			    //paint the cell in red, if we find a needle
+			    panel.setBackground(Color.RED);
+			} 
+			else {
+			    panel.setBackground(Color.WHITE);
+			}
+		return panel;
 	}
-
+	
 }

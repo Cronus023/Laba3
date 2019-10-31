@@ -49,7 +49,8 @@ public class GornerTableModel extends AbstractTableModel {
 		// 2)the value of a polynomial
 		else {
 		    Double result = 0.0;
-		    //the value of the polynomial will be calculated later
+		    for (int i = 0; i < coefficients.length;i++)
+		        result = result*x + coefficients[i];
 		    return result;
 		}
 	}

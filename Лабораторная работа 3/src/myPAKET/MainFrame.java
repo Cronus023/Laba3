@@ -154,7 +154,7 @@ public class MainFrame extends JFrame {
 		
 		//create the button "Очистить поля"
 		JButton buttonReset = new JButton("Очистить поля");
-		buttonCalc.addActionListener(new ActionListener() {
+		buttonReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				//set the value of fields by default
 				textFieldFrom.setText("0.0");
@@ -211,6 +211,23 @@ public class MainFrame extends JFrame {
 		hboxRange.add(textFieldStep);
 		hboxRange.add(Box.createHorizontalGlue());
 		hboxRange.setPreferredSize(new Dimension(new Double(hboxRange.getMaximumSize().getWidth()).intValue(),new Double(hboxRange.getMinimumSize().getHeight()).intValue()*2));getContentPane().add(hboxRange, BorderLayout.NORTH);
+	
+		// put buttons "Вычислить" and "Очистить поля" in container(СENTER)
+		Box hboxButtons = Box.createHorizontalBox();
+		hboxButtons.setBorder(BorderFactory.createBevelBorder(1));
+		hboxButtons.add(Box.createHorizontalGlue());
+		
+		hboxButtons.add(buttonCalc);
+		hboxButtons.add(Box.createHorizontalStrut(30));
+		
+		hboxButtons.add(buttonReset);
+		hboxButtons.add(Box.createHorizontalGlue());
+		
+		hboxButtons.setPreferredSize(new Dimension(new Double(hboxButtons.getMaximumSize().getWidth()).intValue(), new Double(hboxButtons.getMinimumSize().getHeight()).intValue()*2));
+		getContentPane().add(hboxButtons, BorderLayout.SOUTH);
+		hBoxResult = Box.createHorizontalBox();
+		hBoxResult.add(new JPanel());
+		getContentPane().add(hBoxResult, BorderLayout.CENTER);
 	}
 	
 	protected void saveToTextFile(File selectedFile) {

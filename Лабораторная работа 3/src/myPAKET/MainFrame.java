@@ -190,6 +190,27 @@ public class MainFrame extends JFrame {
 		JLabel labelForStep = new JLabel("с шагом:");
 		textFieldStep = new JTextField("0.1", 10);
 		textFieldStep.setMaximumSize(textFieldStep.getPreferredSize());
+		
+		
+		Box hboxRange = Box.createHorizontalBox();
+		hboxRange.setBorder(BorderFactory.createBevelBorder(1));
+		hboxRange.add(Box.createHorizontalGlue());
+		
+		hboxRange.add(labelForFrom);
+		hboxRange.add(Box.createHorizontalStrut(10));
+		hboxRange.add(textFieldFrom);
+		hboxRange.add(Box.createHorizontalStrut(20));
+		
+		hboxRange.add(labelForTo);
+		hboxRange.add(Box.createHorizontalStrut(10));
+		hboxRange.add(textFieldTo);
+		hboxRange.add(Box.createHorizontalStrut(20));
+		
+		hboxRange.add(labelForStep);
+		hboxRange.add(Box.createHorizontalStrut(10));
+		hboxRange.add(textFieldStep);
+		hboxRange.add(Box.createHorizontalGlue());
+		hboxRange.setPreferredSize(new Dimension(new Double(hboxRange.getMaximumSize().getWidth()).intValue(),new Double(hboxRange.getMinimumSize().getHeight()).intValue()*2));getContentPane().add(hboxRange, BorderLayout.NORTH);
 	}
 	
 	protected void saveToTextFile(File selectedFile) {

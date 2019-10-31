@@ -88,6 +88,20 @@ public class MainFrame extends JFrame {
 		// by default, the menu item is not available (no data yet)
 		saveToTextMenuItem.setEnabled(false);
 		
+		//create a new "action" - save to a text file for graph
+		Action saveToGraphicsAction = new AbstractAction("Сохранить данные для построения графика") {
+		public void actionPerformed(ActionEvent event) {
+		    if (fileChooser==null) {
+		        fileChooser = new JFileChooser();
+		        fileChooser.setCurrentDirectory(new File("."));
+		    }
+		    if (fileChooser.showSaveDialog(MainFrame.this) == JFileChooser.APPROVE_OPTION);
+		        saveToGraphicsFile(fileChooser.getSelectedFile());
+		}
+		};
+		saveToGraphicsMenuItem = fileMenu.add(saveToGraphicsAction);
+		saveToGraphicsMenuItem.setEnabled(false);
+		
 	}
 	
 	protected void saveToTextFile(File selectedFile) {

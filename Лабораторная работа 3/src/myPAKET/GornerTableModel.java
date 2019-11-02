@@ -31,7 +31,7 @@ public class GornerTableModel extends AbstractTableModel {
 	
 	//we have only two columns
 	public int getColumnCount() {
-		return 2;
+		return 3;
 	}
     
 	//the number of rows in the table depends on the length of the tabulation interval and the step size
@@ -43,15 +43,47 @@ public class GornerTableModel extends AbstractTableModel {
 	public Object getValueAt(int row, int col) {
 		// 1)the value of X
 		double x = from + step*row;
+		Double result = 0.0;
+		for(int i = 0; i < coefficients.length;i++)
+		    result = result*x + coefficients[i];
 		if (col==0) {
 		    return x;
 		} 
 		// 2)the value of a polynomial
-		else {
-		    Double result = 0.0;
-		    for (int i = 0; i < coefficients.length;i++)
-		        result = result*x + coefficients[i];
+		else if (col == 1){
 		    return result;
+		}
+		else {
+			int flag = 0, flag1 = 0, flag2 = 0, flag3 = 0;
+			Double result1 = result;
+			if(result1 - result1.intValue()==0)
+				flag1 = 1;
+			
+			//check the integer part of the number for parity or odd
+			while(result.intValue()!=0) {
+				if(result.intValue()%2 == 0) {
+					flag2=1;
+				}
+				else {
+					flag = 1;
+				}
+				result/=10;
+			}
+			
+			//check the fractional part of the number for parity or odd
+			while(result1 - result1.intValue()!=0) {
+				if((result1*10) % 2 == 0) {
+					flag1 = 1;
+				}
+				else {
+					flag3 = 1;
+				}
+				result1*=10;
+			}
+			
+			if ((flag == 0 && flag1 == 0) || (flag2 == 0  && flag3 == 0))
+			    return 1;
+			return 0;
 		}
 	}
     
@@ -65,8 +97,10 @@ public class GornerTableModel extends AbstractTableModel {
 		switch (col){
 		case 0:
 		    return "Значение X";
-		default:
+		case 1:
 		    return "Значение многочлена";
+		default:
+		    return "Разностороннее";
 		}
 	}
 	

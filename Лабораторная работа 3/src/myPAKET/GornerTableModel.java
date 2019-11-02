@@ -1,5 +1,6 @@
 package myPAKET;
 
+import javax.swing.JCheckBox;
 import javax.swing.table.AbstractTableModel;
 
 public class GornerTableModel extends AbstractTableModel {
@@ -33,7 +34,6 @@ public class GornerTableModel extends AbstractTableModel {
 	public int getColumnCount() {
 		return 3;
 	}
-    
 	//the number of rows in the table depends on the length of the tabulation interval and the step size
 	public int getRowCount(){
 	    return new Double(Math.ceil((to-from)/step)).intValue()+1;
@@ -54,18 +54,18 @@ public class GornerTableModel extends AbstractTableModel {
 		    return result;
 		}
 		else {
-			int flag = 0, flag1 = 0, flag2 = 0, flag3 = 0;
+			boolean flag = false, flag1 = false, flag2 = false, flag3 = false;
 			Double result1 = result;
 			if(result1 - result1.intValue()==0)
-				flag1 = 1;
+				flag1 = true;
 			
 			//check the integer part of the number for parity or odd
 			while(result.intValue()!=0) {
 				if(result.intValue()%2 == 0) {
-					flag2=1;
+					flag2=true;
 				}
 				else {
-					flag = 1;
+					flag = true;
 				}
 				result/=10;
 			}
@@ -73,22 +73,24 @@ public class GornerTableModel extends AbstractTableModel {
 			//check the fractional part of the number for parity or odd
 			while(result1 - result1.intValue()!=0) {
 				if((result1*10) % 2 == 0) {
-					flag1 = 1;
+					flag1 = true;
 				}
 				else {
-					flag3 = 1;
+					flag3 = true;
 				}
 				result1*=10;
 			}
-			
-			if ((flag == 0 && flag1 == 0) || (flag2 == 0  && flag3 == 0))
-			    return 1;
-			return 0;
+			boolean b = true;
+			if ((flag == false && flag1 == false) || (flag2 == false  && flag3 == false))
+			    return true;
+			return false;
 		}
 	}
     
 	//get information about column names
 	public Class<?> getColumnClass(int col) {
+		if(col == 2)
+			return Boolean.class;
 		return Double.class;
 	}
 

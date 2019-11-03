@@ -1,6 +1,5 @@
 package myPAKET;
 
-import javax.swing.JCheckBox;
 import javax.swing.table.AbstractTableModel;
 
 public class GornerTableModel extends AbstractTableModel {
@@ -54,9 +53,9 @@ public class GornerTableModel extends AbstractTableModel {
 		    return result;
 		}
 		else {
-			boolean flag = false, flag1 = false, flag2 = false, flag3 = false;
-			Double result1 = result;
-			if(result1 - result1.intValue()==0)
+		    boolean flag = false, flag1 = false, flag2 = false, flag3 = false;
+			Double ClonOfResult = result;
+			if(ClonOfResult - ClonOfResult.intValue()==0)
 				flag1 = true;
 			
 			//check the integer part of the number for parity or odd
@@ -71,16 +70,15 @@ public class GornerTableModel extends AbstractTableModel {
 			}
 			
 			//check the fractional part of the number for parity or odd
-			while(result1 - result1.intValue()!=0) {
-				if((result1*10) % 2 == 0) {
+			while(ClonOfResult - ClonOfResult.intValue()!=0) {
+				if((ClonOfResult*10) % 2 == 0) {
 					flag1 = true;
 				}
 				else {
 					flag3 = true;
 				}
-				result1*=10;
+				ClonOfResult*=10;
 			}
-			boolean b = true;
 			if ((flag == false && flag1 == false) || (flag2 == false  && flag3 == false))
 			    return true;
 			return false;
